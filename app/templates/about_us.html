@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='about_us.css')}}">
+    <title>About us</title>
+</head>
+<body>
+    <!-- The header contains the menu and the cart -->
+    <header>
+        <nav class="menu">
+            <div class="spacer"></div>
+
+            <div>
+                <ul class="main-menu">
+                    <li><a href="{{url_for('main.about_us')}}">About us</a></li>
+                    <li><a href="{{url_for('main.home')}}">Home</a></li>
+                    <li><a href="{{url_for('main.products')}}">Products</a></li>
+                </ul>
+            </div>
+
+            <div class="cart-button"><a href="#">Cart</a></div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="first_element"></div>
+
+        <div class="continut">
+            <div class="title_subtitles">
+                <h1 style="margin: 0;">Our passion starts with a single coffee bean</h1>
+                <h2>We roast in small batches, source beans only from responsible farms, and deliver the authentic aroma — for better mornings, sip by sip.</h2>
+                <h3>We're Nesso, a small roastery born from a love for honest, well-crafted coffee. We take pride in carefully selected beans, roasted with care, and delivered with joy.</h3>
+            </div>
+            <div class="shop_now_button">
+                <a href="{{url_for('main.products')}}">SHOP NOW</a>
+            </div>
+
+            <br><hr>
+
+            <div class="story">
+                <h1>Our Story</h1>
+                <div class="part1">
+                    <h3>How it begin:</h3>
+                    <p>It all started with a trip where we tasted a coffee that completely changed our mornings. We wanted to recreate that perfect balance of body, acidity, and aroma — so we began learning every step, from sourcing beans to roasting each batch by hand.</p>
+                </div>
+                <div class="part2">
+                    <h3>What we do today:</h3>
+                    <p>We roast in small batches to preserve freshness, work directly with farmers, and constantly test roast profiles to bring out the unique character of each variety. Every bag tells a story — region, altitude, processing — all influencing what ends up in your cup.</p>
+                </div>
+                <div class="part3">
+                    <h3>Why it matters to us:</h3>
+                    <p>For us, coffee isn't just a product — it's a bridge between people. We support sustainable practices, pay farmers fairly, and invest in long-term partnerships. When you drink our coffee, you're part of a small change that makes a big difference.</p>
+                </div>
+            </div>
+
+            <br><hr>
+
+            <div class="cornerstones">
+                <h1>Timeline / Milestones</h1>
+                <div class="garage-roast">
+                    <img src="{{url_for('static', filename='images/garage-roast.png')}}" alt="Our beginning, roasting coffee">
+                    <p>2016: First roast in a garage — pure experimentation.</p>
+                </div>
+                <div class="shop">
+                    <img src="{{url_for('static', filename='images/shop.png')}}" alt="Our shop image">
+                    <p>2018: Opened our roastery and began direct trade with two farms.</p>
+                </div>
+                <div class="processing">
+                    <img src="{{url_for('static', filename='images/processing.png')}}" alt="Processing factory">
+                    <p>2021: Launched our single-origin and specialty coffee line.</p>
+                </div>
+                <div class="reciclable_packaging">
+                    <img src="{{url_for('static', filename='images/reciclable.png')}}" alt="Reciclable packaging">
+                    <p>2024: Introduced sustainable, fully recyclable packaging.</p>
+                </div>
+            </div>
+
+            <br><hr>
+
+            <h1 style="text-align: center; color: rgb(62, 44, 35);">Meet the Team</h1>
+            <div class="personnel">
+                <div class="personnel1">
+                    <img src="{{url_for('static', filename='images/personnel-Andrei.jpg')}}" alt="One of our personnel">
+                    <p>Andrei — Head Roaster: Coffee alchemist, jazz lover, and always chasing the perfect espresso shot.</p>
+                </div>
+                <div class="personnel1">
+                    <img src="{{url_for('static', filename='images/personnel-Maria.jpg')}}" alt="One of our personnel">
+                    <p>Maria — Sourcing & Quality: Keeps in touch with farmers and has a superpower for spotting the best beans.</p>
+                </div>
+                <div class="personnel1">
+                    <img src="{{url_for('static', filename='images/personnel-Alex.png')}}" alt="One of our personnel">
+                    <p>Alex — Customer Experience: Makes sure every bag arrives fresh and every customer feels like a friend.</p>
+                </div>
+            </div>
+
+            <br><hr>
+
+            <div class="values">
+                <h1>Our hey values:</h1>
+                <ul class="values_list">
+                    <li>Sustainability: Partnering with farms that protect their land and communities.</li>
+                    <li>Quality: Roasting in small batches to highlight every bean's natural flavors.</li>
+                    <li>Community: Supporting local initiatives and building long-term relationships.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="contact">
+            <p>Contact:nesso@gmail.com</p>
+            <p>Facebook: NessoCoffee</p>
+            <p>Instagram: nessocoffee</p>
+            <p>TikTok: NessoCoffee</p>
+        </div>
+        <div class="rights">
+            <p>&copy; Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,12 @@
+#The file that contains virtual variables that we load
+.env
+
+#The virtual environment
+.venv/
+venv/
+
+#The vscode setting
+.vscode/
+
+#The bytecode that is created by python to shorthen the runtime of the app packet when imported
+app/__pychache__/

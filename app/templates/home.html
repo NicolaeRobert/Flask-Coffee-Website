@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <!-- The header contains the menu and the cart-->
+    <header>
+        <nav class="menu">
+            <!-- Here we show the register link or the logout link that redirects to the specific page -->
+            <div class="account">
+                {% if account_show == False: %}
+                    <a href="{{url_for('auth.register')}}">Register</a>
+                {%else: %}
+                    <a href="{{url_for('auth.logout')}}">Log out</a>
+                {% endif %}
+            </div>
+                
+            <!-- The menu with all the pages of the website -->
+            <div>
+                <ul class="main-menu">
+                    <li><a href="{{url_for('main.about_us')}}">About us</a></li>
+                    <li><a href="{{url_for('main.home')}}">Home</a></li>
+                    <li><a href="{{url_for('main.products')}}">Products</a></li>
+                </ul>
+            </div>
+
+            <!-- The cart link that should redirect to that page. I am still working on this one and will add it later -->
+            <div class="cart-button">
+                <a href="#">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- The main part of the page -->
+    <main>
+        <!-- The introduction that includes a title along with a subtitle and an image -->
+        <div class="introduction">
+            <div class="text">
+                <h1>The best coffee in town</h1>
+                <h2>Loved by our community</h2>
+            </div>
+            <div>
+                <img src="{{url_for('static', filename='images/coffee.png')}}" alt="Coffee image" class="image">
+            </div>
+        </div>
+
+        <!-- The product section where we show all of out products -->
+        <div class="product_section">
+            <!-- The online products -->
+            <div class="online_sales">
+                <div class="subtitle">
+                    <p>Our online Products</p>
+                </div>
+                <div class="dark_coffee">
+                    <img src="{{url_for('static', filename='images/organic_dark_coffee.png')}}" alt="Dark coffee" class="dark_coffee_img">
+                    <p>Savor the rich, bold flavor of 100% organic Arabica beans, carefully roasted to perfection for a smooth, full-bodied taste. Ethically sourced and freshly ground, this Dark Roast delivers deep chocolatey notes with a hint of caramel, perfect for your morning ritual or an afternoon boost.</p>
+                </div>
+                <div class="nespreso_beens">
+                    <p>Unlock the intense aroma and bold flavor of Nesso Espresso Whole Bean Coffee. Made from 100% premium Arabica beans, expertly roasted to bring out rich cocoa notes and a smooth, velvety finish. Perfect for espresso machines, moka pots, or freshly grinding for your favorite brew, these beans deliver a café-quality experience right at home.</p>
+                    <img src="{{url_for('static', filename='images/nespreso_beens.png')}}" alt="Nespreso beens" class="nespreso_beens_img">
+                </div>
+                <div class="brew_and_capsules">
+                    <div class="brew">
+                        <img src="{{url_for('static', filename='images/brew.png')}}" alt="Brew" class="brew_img">
+                        <p>Smooth, refreshing cold brew made from 100% organic Arabica beans.</p>
+                    </div>
+                    <div class="capsules">
+                        <img src="{{url_for('static', filename='images/capsules.png')}}" alt="Capsules" class="capsules_img">
+                        <p>Intense, smooth espresso in convenient Nespresso-compatible capsules</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The product that you can find in our shop -->
+            <div class="shop_products">
+                <div class="subtitle">
+                    <p>Best sellers in out shop</p>
+                </div>
+                <div class="products">
+                    <div class="organic_coffee">
+                        <img src="{{url_for('static', filename='images/organic_coffee.png')}}" alt="Organic coffee" class="organic_coffee_img">
+                        <p>Cafea organica</p>
+                    </div>
+                    <div class="capucinno">
+                        <img src="{{url_for('static', filename='images/capucinno.png')}}" alt="Capucinno" class="capucinno_img">
+                        <p>Capucinno</p>
+                    </div>
+                    <div class="cold_brew">
+                        <img src="{{url_for('static', filename='images/cold_brew.png')}}" alt="Cold_brew" class="cold_brew_img">
+                        <p>Cold brew</p>
+                    </div>
+                    <div class="ice_late">
+                        <img src="{{url_for('static', filename='images/ice_late.png')}}" alt="Ice late" class="ice_late_img">
+                        <p>Ice late</p>
+                    </div>
+                    <div class="speciality">
+                        <img src="{{url_for('static', filename='images/speciality.png')}}" alt="Cafea organica" class="speciality_img">
+                        <p>Our speciality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- The footer of the website with all the contacts where the clients can contact us -->
+    <footer>
+        <div class="contact">
+            <p>Contact:nesso@gmail.com</p>
+            <p>Facebook: NessoCoffee</p>
+            <p>Instagram: nessocoffee</p>
+            <p>TikTok: NessoCoffee</p>
+        </div>
+        <div class="rights">
+            <p>&copy; Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='products.css')}}">
+    <title>Products</title>
+</head>
+<body>
+    <!-- The header contains the menu and the cart -->
+    <header>
+        <nav class="menu">
+            <!-- A spacer that helps center the menu -->
+            <div class="spacer"></div>
+
+            <!-- The menu with all the link to the other pages -->
+            <div>
+                <ul class="main-menu">
+                    <li><a href="{{url_for('main.about_us')}}">About us</a></li>
+                    <li><a href="{{url_for('main.home')}}">Home</a></li>
+                    <li><a href="{{url_for('main.products')}}">Products</a></li>
+                </ul>
+            </div>
+
+            <!-- Still working on this one -->
+            <div class="cart-button"><a href="#">Cart</a></div>
+        </nav>
+    </header>
+
+    <!-- The main part of the web page that contains all the products that we sell online -->
+    <!-- Still working on this one. I have to add the add buttons to be able to add them in a cart -->
+    <main>
+        <div class="products">
+            <div class="dark_coffee">
+                <img src="{{url_for('static', filename='images/organic_dark_coffee.png')}}" alt="Dark coffee" class="dark_coffee_img">
+                <p>Dark coffee</p>
+            </div>
+            <div class="nespreso_beens">
+                <img src="{{url_for('static', filename='images/nespreso_beens.png')}}" alt="Nespreso beens" class="nespreso_beens_img">
+                <p>Nespreso beens</p>
+            </div>
+            <div class="brew">
+                <img src="{{url_for('static', filename='images/brew.png')}}" alt="Brew" class="brew_img">
+                <p>Brew</p>
+            </div>
+            <div class="capsules">
+                <img src="{{url_for('static', filename='images/capsules.png')}}" alt="Capsules" class="capsules_img">
+                <p>Capsules</p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- The footer with all the contact where any client can contact us -->
+    <footer>
+        <div class="contact">
+            <p>Contact:nesso@gmail.com</p>
+            <p>Facebook: NessoCoffee</p>
+            <p>Instagram: nessocoffee</p>
+            <p>TikTok: NessoCoffee</p>
+        </div>
+        <div class="rights">
+            <p>&copy; Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

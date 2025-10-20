@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(245, 240, 230);
+}
+.container{
+    display: block;
+    text-align: center;
+    margin-top: 100px;
+}
+.register_form{
+    display: inline-block;
+    height: 500px;
+    width: 400px;
+    background-color: rgb(138, 154, 91);
+    border-radius: 15px;
+    border: 1px solid black;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 50px;
+}
+.form a{
+    text-decoration: none;
+    color: black;
+}
