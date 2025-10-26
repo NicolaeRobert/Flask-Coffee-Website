@@ -42,3 +42,45 @@ def create_session(username, id):
     session.permanent=True
     session["user_id"]=id
     session["username"]=username
+
+#Here we get all the orders that a user has done and order them in a useful way for working with them
+def get_orders():
+    #Here I get the connection and the cursor for executing queries to the database
+    conn=get_connection()
+    mycursor=get_cursor()
+
+    #Here I check how may orders does the user have
+    mycursor.execute('SELECT COUNT(*) FROM ORDERS WHERE id_user=%s',(session['user_id'],))
+    nr_of_orders=mycursor.fetchone()
+    nr_of_orders=nr_of_orders[0]#To keep the value of the tuple
+
+    #Check if there are any orders, else return an empty dictionary
+    if nr_of_orders==0:
+        return {}
+
+    #Here I execute the query and bring all the orders of the user from the database to the code
+    mycursor.execute('''
+    SELECT id_order,date,delivered,total,id_prod,quantity FROM ORDERS
+    INNER JOIN ITEMS_ORDER ON ORDERS.ID=ITEMS_ORDER.ID_ORDER
+    WHERE ORDERS.id_user=%s
+    ORDER BY ORDERS.ID DESC
+    ''',(session['user_id'],))
+    result=mycursor.fetchall()
+
+    mycursor.close()
+
+    #Here I set the data brought from the database in a better format
+    dictionary={}
+    dictionary[nr_of_orders]=[]
+    dictionary[nr_of_orders].append(result[0])
+
+    for data in result[1:]:
+        if dictionary[nr_of_orders][0][0]==data[0]:
+            dictionary[nr_of_orders].append(data)
+        else:
+            nr_of_orders-=1
+            dictionary[nr_of_orders]=[]
+            dictionary[nr_of_orders].append(data)
+
+    #Return the data in a format of dictionary{nr_of_order:[(info_item1),(info_intem2),...],...}
+    return dictionary

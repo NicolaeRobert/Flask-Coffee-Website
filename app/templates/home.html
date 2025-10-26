@@ -15,7 +15,13 @@
                 {% if account_show == False: %}
                     <a href="{{url_for('auth.register')}}">Register</a>
                 {%else: %}
-                    <a href="{{url_for('auth.logout')}}">Log out</a>
+                    <div class="dropdown">
+                        <a href="{{url_for('main.user_page')}}">Account</a>
+                        <div class="dropdown_hidden">
+                            <a href="{{url_for('auth.logout')}}">Log out</a>
+                        </div>
+                    </div>
+                   
                 {% endif %}
             </div>
                 

@@ -1,0 +1,218 @@
+*{
+    margin: 0;
+}
+
+header{
+    background-color: rgb(62, 44, 35);
+}
+.menu{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.menu a{
+    text-decoration: none;
+    color:rgb(245, 240, 230)
+}
+.menu a:hover{
+    color: rgb(138, 154, 91);
+}
+.main-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+.main-menu li{
+    list-style-type: none;
+}
+
+.separator{
+    background-color: rgb(245, 240, 230);
+    height: 1px;
+}
+
+hr{
+    box-shadow: 0px -5px 15px 2px rgb(62, 44, 35);
+}
+.div_title{
+    background-color: rgb(62, 44, 35);
+    text-align: center;
+    height: 60px;
+}
+.title{
+    padding: 10px;
+    color: rgb(245, 240, 230)
+}
+.center{
+    background-color:  rgb(245, 240, 230);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.username_div{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 250px;
+    background-color: rgb(138, 154, 91);
+    width: 400px;
+    border-radius: 15px;
+    color: rgb(62, 44, 35);
+}
+.username_div h3{
+    padding: 20px;
+    text-align: center;
+}
+.username_div input,button{
+    color: inherit;
+}
+.form_username{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.orders_heading{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: rgb(138, 154, 91);
+    border-radius: 5px;
+    height: 50px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#no_order{
+    display: none;
+    height: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(138, 154, 91);
+    text-align: center;
+    margin-bottom: 30px;
+}
+#no_order a{
+    text-decoration: none;
+    color: rgb(245, 240, 230);
+}
+.link_to_products{
+    margin-top: 5px;
+    padding: 5px;
+    display: inline-block;
+    height: 25px;
+    width: 90px;
+    border-radius: 5px;
+    background-color: rgb(62, 44, 35);
+}
+.items{ 
+    margin-bottom: 40px;
+}
+.order{
+    margin: 20px;
+    padding: 15px;
+    background-color: rgb(138, 154, 91);
+    border-radius: 15px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.items_order{
+    width: 200px;
+    background-color: rgb(245, 240, 230);
+    border-radius: 5px;
+    padding: 5px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+#more_button, #less_button{
+    height: 50px;
+    width:75px;
+    background-color: rgb(62, 44, 35);
+    color: rgb(245, 240, 230);
+    border-radius: 10px;
+    display: none;
+}
+#more_button:hover, #less_button:hover{
+    background-color: rgb(80, 55, 45);
+}
+
+.final_title{
+    padding-top: 20px;
+    background-color: rgb(245, 240, 230);
+    text-align: center;
+    color: rgb(62, 44, 35);
+}
+.log_out_and_new_password_div{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:70px;
+    background-color: rgb(245, 240, 230);
+}
+.log_out{
+    height:40px;
+    width: 70px;
+    background-color: rgb(62, 44, 35);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.log_out:hover{
+    background-color: rgb(80, 55, 45);
+}
+.log_out a{
+    text-decoration: none;
+    color: rgb(245, 240, 230);
+}
+.new_password{
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: rgb(138, 154, 91);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.password_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.password_form input,button{
+    color: rgb(62, 44, 35);
+}
+footer{
+    background-color: rgb(62, 44, 35);
+    color: rgb(245, 240, 230);
+}
+.contact{
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.rights{
+    padding: 20px;
+    text-align: center;
+}

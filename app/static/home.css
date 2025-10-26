@@ -5,6 +5,20 @@ body{
 header{
     background-color: rgb(62, 44, 35);
 }
+.dropdown{
+    position: relative;
+}
+.dropdown:hover .dropdown_hidden{
+    display: block;
+}
+.dropdown_hidden{
+    position: absolute;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    background-color: rgb(80, 55, 45);
+    width: 60px;
+}
 .menu{
     height: 80px;
     display: flex;

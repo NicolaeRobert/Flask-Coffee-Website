@@ -3,6 +3,7 @@ from datetime import timedelta
 from flask_mailman import Mail
 from dotenv import load_dotenv
 import os
+from .utils import close_connections
 
 load_dotenv()
 
@@ -34,6 +35,9 @@ def create_app():
     #Here we register the blueprint called auth
     from .auth import auth_var
     app.register_blueprint(auth_var)
+
+    #Here I set the close_connection function to automatically execute at the end of every request to end the connection to the database
+    app.teardown_appcontext(close_connections)
 
     #Here the object of the app is being returned
     return app

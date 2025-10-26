@@ -9,4 +9,4 @@ venv/
 .vscode/
 
 #The bytecode that is created by python to shorthen the runtime of the app packet when imported
-app/__pychache__/
+app/__pycache__/

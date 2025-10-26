@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='user_page.css')}}">
+    <title>User</title>
+</head>
+<body>
+
+    <header>
+        <nav class="menu">
+            <!-- Here we show the register link or the logout link that redirects to the specific page -->
+            <div class="account">
+                {% if account_show == False: %}
+                    <a href="{{url_for('auth.register')}}">Register</a>
+                {%else: %}
+                    <a href="{{url_for('auth.logout')}}">Log out</a>
+                {% endif %}
+            </div>
+                
+            <!-- The menu with all the pages of the website -->
+            <div>
+                <ul class="main-menu">
+                    <li><a href="{{url_for('main.about_us')}}">About us</a></li>
+                    <li><a href="{{url_for('main.home')}}">Home</a></li>
+                    <li><a href="{{url_for('main.products')}}">Products</a></li>
+                </ul>
+            </div>
+
+            <!-- The cart link that should redirect to that page. I am still working on this one and will add it later -->
+            <div class="cart-button">
+                <a href="#">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="separator"></div>
+
+    <main>
+        <div class="div_title">
+            <h1 class="title">User page</h1>
+        </div>
+        
+
+        <div class="center">
+            <div class="username_div">
+                <h3>Your current username is: {{username}}</h3>
+                <form action="{{url_for('main.user_page')}}" method="post" class="form_username">
+
+                    <div>
+                        <input type="text" name="new_username" placeholder="New username" required>
+                    </div>
+                    <div>
+                        <button action="submit">Change username</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+        </div>
+        
+        <hr>
+
+        <div class="center">
+            <div class="orders_heading">
+                <h3>Orders</h3>
+            </div>
+        </div>
+
+        <div class="center">
+            <div id="no_order">
+                <h3>There are no orders yet.</h3>
+                <div class="link_to_products">
+                    <a href="{{url_for('main.products')}}">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="items">
+                {% for nr_of_order,order in orders.items() %}
+                    <div class="order_object_for_js">
+                        <div class="order">
+                            <div class="order_number">
+                                <h3>Order no. {{nr_of_order}}</h3>
+                            </div>
+                            <div class="items_order">
+                                <p>Order Items:</p>
+                                <div>
+                                    <ul>
+                                        {% for item in order %}
+                                            {% if item[4]==1 %}
+                                                <li>Dark Coffee</li>
+                                            {% elif item[4]==2 %}
+                                                <li>Nespreso Beens</li>
+                                            {% elif item[4]==3 %}
+                                                <li>Brew</li>
+                                            {% else %}
+                                                <li>Capsules</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul> 
+                                </div>
+                            </div>
+                            <div class="details_order">
+                                <p>Total:{{ order[0][3] }}</p>
+                                <p>Date and time:{{ order[0][1] }}</p>
+                                <p>Delivered:
+                                    {% if order[0][2]==0 %}
+                                        NO
+                                    {% else %}
+                                        YES
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                     </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="center">
+            <div class="buttons">
+                <button id="more_button">More</button>
+                <button id="less_button">Less</button>
+            </div>
+        </div>
+        
+        <hr>
+
+        <div class="final_title">
+            <h3>Log out or change your password</h3>
+        </div>
+        
+
+        <div class="log_out_and_new_password_div">
+            <div class="log_out">
+                <a href="{{url_for('auth.logout')}}">Log out</a>
+            </div>
+
+            <div class="new_password">
+                <form action="{{url_for('main.user_page')}}" method="post" class="password_form">
+                    <div>
+                        <input type="password" name="new_password" placeholder="New password" required>
+                    </div>
+                    <div>
+                        <button action="submit">Change password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <div class="contact">
+            <p>Contact:nesso@gmail.com</p>
+            <p>Facebook: NessoCoffee</p>
+            <p>Instagram: nessocoffee</p>
+            <p>TikTok: NessoCoffee</p>
+        </div>
+        <div class="rights">
+            <p>&copy; Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+    
+
+    <script>
+        // The variable that hold the reference to all the orders
+        const items=document.querySelectorAll(".order_object_for_js");
+        // The maximum number of elements that are visible by default
+        let visible_elements=3;
+
+        // Get the no order element
+        no_order=document.getElementById("no_order");
+
+        function showItems() {
+            // We go over all elements and decide who can be seen and who can't
+            items.forEach((item, i) => {
+                // If index i < visibleCount => show, otherwise hide
+                item.style.display = (i < visible_elements) ? "block" : "none";
+            });
+
+            // Get a reference to the buttons to set them visible or not in dependence of the case
+            const more_button=document.getElementById("more_button");
+            const less_button=document.getElementById("less_button");
+
+            // If we get to the end of the order list the more button will be hidden, else displayed
+            if(visible_elements>=items.length){
+                more_button.style.display="none";
+            }
+            else{
+                more_button.style.display="inline-block";
+            }
+
+            // If we get past 3 we display the less button, otherwise it is hidden
+            if(visible_elements>3){
+                less_button.style.display="inline-block";
+            }
+            else{
+                less_button.style.display="none";
+            }
+        }
+
+        // Here we implement the functionality for the more button
+        document.getElementById("more_button").addEventListener('click',() =>{
+            visible_elements=Math.min(items.length,visible_elements+3);
+            showItems();
+        });
+
+        // Here we implement the functionality for the less button
+        document.getElementById("less_button").addEventListener('click',() =>{
+            visible_elements=Math.max(3,visible_elements-3);
+            showItems();
+        });
+
+        if(items.length==0){
+            no_order.style.display="inline-block";
+        }
+        else{
+            no_order.style.display="none";
+            showItems();
+        }
+
+    </script>
+
+</body>
+</html>

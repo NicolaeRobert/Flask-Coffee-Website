@@ -10,7 +10,7 @@ auth_var=Blueprint('auth',__name__)
 #We create an object of the PasswordHasher class in order to hash the password
 ph=PasswordHasher()
 
-#The root of the register page(here we accept both get and post method)
+#The route of the register page(here we accept both get and post method)
 @auth_var.route('/register', methods=["GET", "POST"])
 def register():
     #If the method is get we simply render the page, else we create the message, add the account, create the session and send the email. Then we return a confirmation page.
@@ -71,7 +71,7 @@ def register():
         return redirect(url_for("auth.confirmation"))
 
 
-#The login root. Here we also accept both get and post methods
+#The login route. Here we also accept both get and post methods
 @auth_var.route('/login', methods=["GET", "POST"])
 def login():
     #If the method is get we render the login page, else we create a session if the account is valid and if it's not we show a flash message and redirect to the register page in order for an account to be created.
