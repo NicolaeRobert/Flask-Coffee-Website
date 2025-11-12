@@ -66,4 +66,4 @@ def user_page():
             conn.commit()
             mycursour.close()
 
-            return render_template("comfirmation_for_user_page.html",message='email')
+            return render_template("comfirmation_for_user_page.html",message='password')

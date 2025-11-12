@@ -10,3 +10,6 @@ venv/
 
 #The bytecode that is created by python to shorthen the runtime of the app packet when imported
 app/__pycache__/
+
+#This will be deleted. Only used to store info about database configuration
+database configuration.txt

@@ -36,6 +36,10 @@ def create_app():
     from .auth import auth_var
     app.register_blueprint(auth_var)
 
+    #Here we register the bluprint for google connection
+    from .google_auth import auth_with_google
+    app.register_blueprint(auth_with_google)
+
     #Here I set the close_connection function to automatically execute at the end of every request to end the connection to the database
     app.teardown_appcontext(close_connections)
 

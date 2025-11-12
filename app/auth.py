@@ -87,24 +87,40 @@ def login():
         conn=get_connection()
         mycursor=get_cursor()
 
+        #Get the method in witch the account was created(created_with) and the password(result)
         mycursor.execute('SELECT password FROM USERS WHERE email=%s',(email,))
         result=mycursor.fetchone()
+        mycursor.execute('SELECT password FROM USERS WHERE email=%s',(email,))
+        created_with=mycursor.fetchone()
+
+        #If the account was created with google(created_with) and there is no password(result) we alert the user that the connction can be done only with google
+        if created_with=="google" and result is None:
+            flash("You have to connect with google! If you want to connect with email, first connect with google, then set a password from the Account section!",'error')
+            return redirect(url_for('auth.choose_login_method'))
+        #If there is no account and no password, then an account should be created
         if result is None:
             mycursor.close()
-            flash("You don't have an account! Create one here.",'error')
-            return redirect(url_for('auth.register'))
+            flash("You don't have an account! Create one using google or go to register.",'error')
+            return redirect(url_for('auth.choose_login_method'))
         
-        if check_pass(result[0],password):
+        #If there is an account and the password work we authentificate the user
+        if check_pass(result,password):
             mycursor.execute('SELECT username,id FROM USERS WHERE email=%s',(email,))
-            result=mycursor.fetchone()
+            username,id=mycursor.fetchone()
             mycursor.close()
-            create_session(result[0],result[1])
+            create_session(username,id)
             return redirect(url_for('main.home'))
+        #If there is an account but the password is not the same as the one hashed by us, alert the user 
         else:
             mycursor.close()
             flash("Wrong password! Try connecting again.",'error')
             return redirect(url_for('auth.login'))
 
+
+#This runs when you go to login so you choose a method
+@auth_var.route('/choose_login_method')
+def choose_login_method():
+    return render_template("login_or_google-login.html")
 
 #We log out the person by crearing the session and redirect them to the home page
 @auth_var.route('/logout')
