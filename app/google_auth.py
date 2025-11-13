@@ -1,6 +1,8 @@
 from flask import Blueprint, redirect, render_template, session, request, url_for
 from google_auth_oauthlib.flow import Flow
 from .utils import get_connection, get_cursor, create_session
+from flask_mailman import EmailMessage
+from . import mail
 import os
 import requests
 
@@ -92,8 +94,19 @@ def callback():
         )
 
         results=mycursor.fetchone()
-
         conn.commit()
+
+        #Create the message and use the mail object imported from the __init__ file to send
+        account_created_message=EmailMessage(
+            subject='Nesso: account created',
+            body='Congratulations! Your account has been created succesfully.',
+            from_email='u1447448204@gmail.com',
+            to=[user_info['email']],
+            reply_to=['u1447448204@gmail.com']
+        )
+
+        account_created_message.send()
+
 
     #Create the session and close the cursor
     create_session(results[0],results[1])

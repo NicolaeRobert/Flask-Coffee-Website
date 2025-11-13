@@ -33,10 +33,17 @@ def register():
 
         #Here we check if you already have an account with this email and if we have we redirect to the login page and flash a message
         mycursor.execute('SELECT id FROM USERS WHERE email=%s',(email,))
-        result=mycursor.fetchone()
-        if result is not None:
-            flash('You already have an account. Log in here.', "error")
-            return redirect(url_for('auth.login'))
+        id=mycursor.fetchone()
+        mycursor.execute('SELECT created_with FROM USERS WHERE email=%s',(email,))
+        created_with=mycursor.fetchone()
+        if id is not None:
+            #Check to see with what you have create the account and redirect to the specific page
+            if created_with=='email':
+                flash('You already have an account. Log in here.', "error")
+                return redirect(url_for('auth.login'))
+            else:
+                flash('You already have an account. Log in here by pressing connect with google.', "error")
+                return redirect(url_for('auth.choose_login_method'))
 
         #Here we register the user and send an email of confirmation
 
@@ -44,9 +51,9 @@ def register():
         account_created_message=EmailMessage(
             subject="Nesso: account created",
             body="Congratulations! Your account has been created succesfully.",
-            from_email="programminguse985@gmail.com",
+            from_email="u1447448204@gmail.com",
             to=[request.form['email']],
-            reply_to=["programminguse985@gmail.com"]
+            reply_to=["u1447448204@gmail.com"]
         )
 
         
