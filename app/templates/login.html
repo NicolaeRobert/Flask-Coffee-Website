@@ -38,9 +38,14 @@
                     <div class="submit_button">
                         <button type="submit">Submit</button>
                     </div>
-                    <div class="regirect">
+                    <div class="redirect">
                         <p>Don't have an account?</p>
-                        <a href="{{url_for('auth.register')}}">Register</a>
+                        <span class="register">
+                            <a href="{{url_for('auth.register')}}">Register</a>
+                        </span>
+                    </div>
+                    <div class="change_password">
+                        <a href="{{url_for('pass.redirect_and_token_creation')}}">Change password</a>
                     </div>
                 </form>
             </div>

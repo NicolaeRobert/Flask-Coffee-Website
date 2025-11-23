@@ -1,7 +1,7 @@
 from flask import Blueprint, session, redirect, url_for, render_template, request, flash
 from argon2 import PasswordHasher
 from flask_mailman import EmailMessage
-from .utils import get_connection, get_cursor, create_session,check_pass
+from .utils import get_connection, get_cursor, create_session, check_pass
 from . import mail
 
 #Here we create the instance of the blueprint called auth
@@ -97,21 +97,22 @@ def login():
         #Get the method in witch the account was created(created_with) and the password(result)
         mycursor.execute('SELECT password FROM USERS WHERE email=%s',(email,))
         result=mycursor.fetchone()
-        mycursor.execute('SELECT password FROM USERS WHERE email=%s',(email,))
+        mycursor.execute('SELECT created_with FROM USERS WHERE email=%s',(email,))
         created_with=mycursor.fetchone()
 
         #If the account was created with google(created_with) and there is no password(result) we alert the user that the connction can be done only with google
-        if created_with=="google" and result is None:
+        if created_with[0]=="google" and result[0] is None:
+            mycursor.close()
             flash("You have to connect with google! If you want to connect with email, first connect with google, then set a password from the Account section!",'error')
             return redirect(url_for('auth.choose_login_method'))
         #If there is no account and no password, then an account should be created
-        if result is None:
+        if result[0] is None:
             mycursor.close()
             flash("You don't have an account! Create one using google or go to register.",'error')
             return redirect(url_for('auth.choose_login_method'))
         
         #If there is an account and the password work we authentificate the user
-        if check_pass(result,password):
+        if check_pass(result[0],password):
             mycursor.execute('SELECT username,id FROM USERS WHERE email=%s',(email,))
             username,id=mycursor.fetchone()
             mycursor.close()

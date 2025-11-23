@@ -1,0 +1,23 @@
+body{
+    margin: 0px;
+    height: 100vh;
+    background-color: rgb(245, 240, 230);
+}
+main{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form_get_email{
+    background-color: rgb(138, 154, 91);
+    padding: 25px;
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}

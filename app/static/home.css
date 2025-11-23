@@ -29,7 +29,7 @@ header{
 }
 .menu a{
     text-decoration: none;
-    color:rgb(245, 240, 230)
+    color:rgb(245, 240, 230);
 }
 .menu a:hover{
     color: rgb(138, 154, 91);

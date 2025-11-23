@@ -40,6 +40,10 @@ def create_app():
     from .google_auth import auth_with_google
     app.register_blueprint(auth_with_google)
 
+    #Here we register the blueprint for the password change with email
+    from .change_password_with_email import pass_change
+    app.register_blueprint(pass_change)
+
     #Here I set the close_connection function to automatically execute at the end of every request to end the connection to the database
     app.teardown_appcontext(close_connections)
 
