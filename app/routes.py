@@ -17,12 +17,14 @@ def home():
 #The route of the about us page
 @main.route('/about_us')
 def about_us():
-    return render_template("about_us.html")
+    logged="user_id" in session
+    return render_template("about_us.html", account_show=logged)
 
 #The route of the product page
 @main.route('/products')
 def products():
-    return render_template("products.html")
+    logged="user_id" in session
+    return render_template("products.html", account_show=logged)
 
 #The route of the user page
 @main.route('/user_page',methods=["GET","POST"])

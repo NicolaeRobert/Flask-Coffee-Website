@@ -44,6 +44,10 @@ def create_app():
     from .change_password_with_email import pass_change
     app.register_blueprint(pass_change)
 
+    #Here we register the blueprint for the part that takes care of the buying process
+    from .buy_products import buy_product
+    app.register_blueprint(buy_product)
+
     #Here I set the close_connection function to automatically execute at the end of every request to end the connection to the database
     app.teardown_appcontext(close_connections)
 

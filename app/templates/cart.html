@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='cart.css')}}">
+</head>
+<body>
+
+    <header>
+        <nav class="menu">
+            <!-- Here we show the register link or the logout link that redirects to the specific page -->
+            <div class="account">
+                {% if account_show == False: %}
+                    <a href="{{url_for('auth.choose_login_method')}}">Log in</a>
+                {%else: %}
+                    <div class="dropdown">
+                        <a href="{{url_for('main.user_page')}}">Account</a>
+                        <div class="dropdown_hidden">
+                            <a href="{{url_for('auth.logout')}}">Log out</a>
+                        </div>
+                    </div>
+                   
+                {% endif %}
+            </div>
+                
+            <!-- The menu with all the pages of the website -->
+            <div>
+                <ul class="main-menu">
+                    <li><a href="{{url_for('main.about_us')}}">About us</a></li>
+                    <li><a href="{{url_for('main.home')}}">Home</a></li>
+                    <li><a href="{{url_for('main.products')}}">Products</a></li>
+                </ul>
+            </div>
+
+            <!-- The cart link that should redirect to that page. I am still working on this one and will add it later -->
+            <div class="cart-button">
+                <a href="{{url_for('buy.cart')}}">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% if account_show == False: %}
+            <h1 class="warning">You can't buy without being logged. Go to the login page!</h1>
+        {% elif is_empty == False: %}
+            <h1 class="warning">The cart is empty. Go to Products page if you want to buy something!</h1>
+        {% else: %}
+            <div class="container">
+                {% if dark_coffee!='0' %}
+                    <div class="element">
+                        <div class="image_and_name">
+                            <div class="image_dark_coffee"></div>
+                            <p>Dark Coffee</p>
+                        </div>
+                        <div class="quantity">
+                            <form action="{{url_for('buy.change_dark_coffee')}}" method="POST">
+                                <div>
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" name="nr_of_products" id="quantity" min="1" max="99" value={{dark_coffee}}>
+                                </div>
+                                <button type="submit">Change</button>
+                            </form>
+                        </div>
+                        <div class="delete">
+                            <form action="{{url_for('buy.delete_dark_coffee')}}" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if nespreso_beens!='0' %}
+                    <div class="element">
+                        <div class="image_and_name">
+                            <div class="image_nespreso_beens"></div>
+                            <p>Nespreso Beens</p>
+                        </div>
+                        <div class="quantity">
+                            <form action="{{url_for('buy.change_nespreso_beens')}}" method="POST">
+                                <div>
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" name="nr_of_products" id="quantity" min="1" max="99" value={{nespreso_beens}}>
+                                </div>
+                                <button type="submit">Change</button>
+                            </form>
+                        </div>
+                        <div class="delete">
+                            <form action="{{url_for('buy.delete_nespreso_beens')}}" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if brew!='0' %}
+                    <div class="element">
+                        <div class="image_and_name">
+                            <div class="image_brew"></div>
+                            <p>Brew</p>
+                        </div>
+                        <div class="quantity">
+                            <form action="{{url_for('buy.change_brew')}}" method="POST">
+                                <div>
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" name="nr_of_products" id="quantity" min="1" max="99" value={{brew}}>
+                                </div>
+                                <button type="submit">Change</button>
+                            </form>
+                        </div>
+                        <div class="delete">
+                            <form action="{{url_for('buy.delete_brew')}}" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if capsules!='0' %}
+                    <div class="element">
+                        <div class="image_and_name">
+                            <div class="image_capsules"></div>
+                            <p>Capsules</p>
+                        </div>
+                        <div class="quantity">
+                            <form action="{{url_for('buy.change_capsules')}}" method="POST">
+                                <div>
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" name="nr_of_products" id="quantity" min="1" max="99" value={{capsules}}>
+                                </div>
+                                <button type="submit">Change</button>
+                            </form>
+                        </div>
+                        <div class="delete">
+                            <form action="{{url_for('buy.delete_capsules')}}" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+        {% endif %}
+    </main>
+
+    <footer>
+        <div class="contact">
+            <p>Contact:nesso@gmail.com</p>
+            <p>Facebook: NessoCoffee</p>
+            <p>Instagram: nessocoffee</p>
+            <p>TikTok: NessoCoffee</p>
+        </div>
+        <div class="rights">
+            <p>&copy; Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

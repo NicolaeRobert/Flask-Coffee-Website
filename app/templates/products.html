@@ -10,10 +10,22 @@
     <!-- The header contains the menu and the cart -->
     <header>
         <nav class="menu">
-            <!-- A spacer that helps center the menu -->
-            <div class="spacer"></div>
-
-            <!-- The menu with all the link to the other pages -->
+            <!-- Here we show the register link or the logout link that redirects to the specific page -->
+            <div class="account">
+                {% if account_show == False: %}
+                    <a href="{{url_for('auth.choose_login_method')}}">Log in</a>
+                {%else: %}
+                    <div class="dropdown">
+                        <a href="{{url_for('main.user_page')}}">Account</a>
+                        <div class="dropdown_hidden">
+                            <a href="{{url_for('auth.logout')}}">Log out</a>
+                        </div>
+                    </div>
+                   
+                {% endif %}
+            </div>
+                
+            <!-- The menu with all the pages of the website -->
             <div>
                 <ul class="main-menu">
                     <li><a href="{{url_for('main.about_us')}}">About us</a></li>
@@ -22,8 +34,10 @@
                 </ul>
             </div>
 
-            <!-- Still working on this one -->
-            <div class="cart-button"><a href="#">Cart</a></div>
+            <!-- The cart link that should redirect to that page. I am still working on this one and will add it later -->
+            <div class="cart-button">
+                <a href="{{url_for('buy.cart')}}">Cart</a>
+            </div>
         </nav>
     </header>
 
@@ -34,18 +48,46 @@
             <div class="dark_coffee">
                 <img src="{{url_for('static', filename='images/organic_dark_coffee.png')}}" alt="Dark coffee" class="dark_coffee_img">
                 <p>Dark coffee</p>
+                <form action="{{url_for('buy.buy_dark_coffee')}}" method="POST" class="form_for_adding_products">
+                    <div>
+                        <label for="nr_of_products">No. of products:</label>
+                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
             </div>
             <div class="nespreso_beens">
                 <img src="{{url_for('static', filename='images/nespreso_beens.png')}}" alt="Nespreso beens" class="nespreso_beens_img">
                 <p>Nespreso beens</p>
+                <form action="{{url_for('buy.buy_nespreso_beens')}}" method="POST" class="form_for_adding_products">
+                    <div>
+                        <label for="nr_of_products">No. of products:</label>
+                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
             </div>
             <div class="brew">
                 <img src="{{url_for('static', filename='images/brew.png')}}" alt="Brew" class="brew_img">
                 <p>Brew</p>
+                <form action="{{url_for('buy.buy_brew')}}" method="POST" class="form_for_adding_products">
+                    <div>
+                        <label for="nr_of_products">No. of products:</label>
+                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
             </div>
             <div class="capsules">
                 <img src="{{url_for('static', filename='images/capsules.png')}}" alt="Capsules" class="capsules_img">
                 <p>Capsules</p>
+                <form action="{{url_for('buy.buy_capsules')}}" method="POST" class="form_for_adding_products">
+                    <div>
+                        <label for="nr_of_products">No. of products:</label>
+                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
             </div>
         </div>
     </main>

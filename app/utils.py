@@ -42,6 +42,19 @@ def create_session(username, id):
     session.permanent=True
     session["user_id"]=id
     session["username"]=username
+    session["cart"]={
+        "dark_coffee": 0,
+        "nespreso_beens": 0,
+        "brew": 0,
+        "capsules": 0
+    }
+
+#Returns true if there is any element in the cart, or false otherwise
+def are_elements_in_cart():
+    for key in session["cart"]:
+        if session["cart"][key]!=0:
+            return True
+    return False
 
 #Here we get all the orders that a user has done and order them in a useful way for working with them
 def get_orders():

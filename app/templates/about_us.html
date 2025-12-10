@@ -7,11 +7,24 @@
     <title>About us</title>
 </head>
 <body>
-    <!-- The header contains the menu and the cart -->
     <header>
         <nav class="menu">
-            <div class="spacer"></div>
-
+            <!-- Here we show the register link or the logout link that redirects to the specific page -->
+            <div class="account">
+                {% if account_show == False: %}
+                    <a href="{{url_for('auth.choose_login_method')}}">Log in</a>
+                {%else: %}
+                    <div class="dropdown">
+                        <a href="{{url_for('main.user_page')}}">Account</a>
+                        <div class="dropdown_hidden">
+                            <a href="{{url_for('auth.logout')}}">Log out</a>
+                        </div>
+                    </div>
+                   
+                {% endif %}
+            </div>
+                
+            <!-- The menu with all the pages of the website -->
             <div>
                 <ul class="main-menu">
                     <li><a href="{{url_for('main.about_us')}}">About us</a></li>
@@ -20,7 +33,10 @@
                 </ul>
             </div>
 
-            <div class="cart-button"><a href="#">Cart</a></div>
+            <!-- The cart link that should redirect to that page. I am still working on this one and will add it later -->
+            <div class="cart-button">
+                <a href="{{url_for('buy.cart')}}">Cart</a>
+            </div>
         </nav>
     </header>
 
