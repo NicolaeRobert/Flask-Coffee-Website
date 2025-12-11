@@ -89,6 +89,20 @@ header{
     border-radius: 20px;
     border: 1px solid black;
 }
+.out_of_stock{
+    background-color: rgb(245, 240, 230);
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 2px;
+    color: rgb(207, 56, 56);
+}
+.in_stock{
+    background-color: rgb(245, 240, 230);
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 2px;
+    color: rgb(53, 131, 45);
+}
 
 footer{
     background-color: rgb(62, 44, 35);

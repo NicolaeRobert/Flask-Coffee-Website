@@ -47,44 +47,80 @@
         <div class="products">
             <div class="dark_coffee">
                 <img src="{{url_for('static', filename='images/organic_dark_coffee.png')}}" alt="Dark coffee" class="dark_coffee_img">
-                <p>Dark coffee</p>
+                <p>Dark coffee - $13.99</p>
+                {% if dark_coffee==0 %}
+                    <p class="out_of_stock">Out of stock</p>
+                {% else %}
+                    <p class="in_stock">In stock</p>
+                {% endif %}
                 <form action="{{url_for('buy.buy_dark_coffee')}}" method="POST" class="form_for_adding_products">
                     <div>
                         <label for="nr_of_products">No. of products:</label>
-                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% if dark_coffee==0 %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="0" max="0" value="0">
+                        {% else %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% endif %}
                     </div>
                     <button type="submit">Add</button>
                 </form>
             </div>
             <div class="nespreso_beens">
                 <img src="{{url_for('static', filename='images/nespreso_beens.png')}}" alt="Nespreso beens" class="nespreso_beens_img">
-                <p>Nespreso beens</p>
+                <p>Nespreso beens - $12.99</p>
+                {% if nespreso_beens==0 %}
+                    <p class="out_of_stock">Out of stock</p>
+                {% else %}
+                    <p class="in_stock">In stock</p>
+                {% endif %}
                 <form action="{{url_for('buy.buy_nespreso_beens')}}" method="POST" class="form_for_adding_products">
                     <div>
                         <label for="nr_of_products">No. of products:</label>
-                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% if nespreso_beens==0 %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="0" max="0" value="0">
+                        {% else %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% endif %}
                     </div>
                     <button type="submit">Add</button>
                 </form>
             </div>
             <div class="brew">
                 <img src="{{url_for('static', filename='images/brew.png')}}" alt="Brew" class="brew_img">
-                <p>Brew</p>
+                <p>Brew - $9.99</p>
+                {% if brew==0 %}
+                    <p class="out_of_stock">Out of stock</p>
+                {% else %}
+                    <p class="in_stock">In stock</p>
+                {% endif %}
                 <form action="{{url_for('buy.buy_brew')}}" method="POST" class="form_for_adding_products">
                     <div>
                         <label for="nr_of_products">No. of products:</label>
-                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% if brew==0 %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="0" max="0" value="0">
+                        {% else %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% endif %}
                     </div>
                     <button type="submit">Add</button>
                 </form>
             </div>
             <div class="capsules">
                 <img src="{{url_for('static', filename='images/capsules.png')}}" alt="Capsules" class="capsules_img">
-                <p>Capsules</p>
+                <p>Capsules - $11.99</p>
+                {% if capsules==0 %}
+                    <p class="out_of_stock">Out of stock</p>
+                {% else %}
+                    <p class="in_stock">In stock</p>
+                {% endif %}
                 <form action="{{url_for('buy.buy_capsules')}}" method="POST" class="form_for_adding_products">
                     <div>
                         <label for="nr_of_products">No. of products:</label>
-                        <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% if capsules==0 %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="0" max="0" value="0">
+                        {% else %}
+                            <input type="number" name="nr_of_products" id="nr_of_products" min="1" max="99" value="1">
+                        {% endif %}
                     </div>
                     <button type="submit">Add</button>
                 </form>

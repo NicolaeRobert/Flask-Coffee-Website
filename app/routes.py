@@ -24,7 +24,17 @@ def about_us():
 @main.route('/products')
 def products():
     logged="user_id" in session
-    return render_template("products.html", account_show=logged)
+
+    mycursor=get_cursor()
+
+    mycursor.execute('SELECT stock FROM products')
+    dark_coffee,nespreso_beens,brew,capsules=mycursor.fetchall()
+
+    print(dark_coffee,nespreso_beens,brew,capsules)
+
+    mycursor.close()
+
+    return render_template("products.html", account_show=logged, dark_coffee=dark_coffee[0], nespreso_beens=nespreso_beens[0], brew=brew[0], capsules=capsules[0])
 
 #The route of the user page
 @main.route('/user_page',methods=["GET","POST"])
