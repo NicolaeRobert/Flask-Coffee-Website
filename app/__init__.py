@@ -48,6 +48,10 @@ def create_app():
     from .buy_products import buy_product
     app.register_blueprint(buy_product)
 
+    #Here we register the blueprint for the stripe implementation
+    from .stripe import stripe_implementation
+    app.register_blueprint(stripe_implementation)
+
     #Here I set the close_connection function to automatically execute at the end of every request to end the connection to the database
     app.teardown_appcontext(close_connections)
 

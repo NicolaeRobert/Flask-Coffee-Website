@@ -136,6 +136,11 @@
                         </div>
                     </div>
                 {% endif %}
+                {% if dark_coffee!='0' or nespreso_beens!='0' or brew!='0' or capsules!='0' %}
+                    <a href="{{url_for('stripe.redirect_to_stripe')}}" class="pay">
+                        <p>Pay</p>
+                    </a>
+                {% endif %}
             </div>
             
         {% endif %}

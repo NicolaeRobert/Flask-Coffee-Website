@@ -132,6 +132,20 @@ header{
 .delete button:hover{
     background-color: rgb(218, 52, 52);
 }
+.pay{
+    display: inline-block;
+    width: 100px;
+    border-radius: 35px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    background-color: rgb(190, 120, 60);
+}
+.pay:hover{
+    background-color: rgb(170, 100, 45);
+}
 
 footer{
     background-color: rgb(62, 44, 35);
