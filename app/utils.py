@@ -97,3 +97,27 @@ def get_orders():
 
     #Return the data in a format of dictionary{nr_of_order:[(info_item1),(info_intem2),...],...}
     return dictionary
+
+#This funtion deletes payment success/failed webhooks older that 7 days
+def delete_old_webhooks(witch_one):
+    # !!! IMPORTANT !!! If witch_one is true we delete the ones from payment success table, if it is false delete the one from payment failed 
+
+    #Get the connection and the cursor
+    conn=get_connection()
+    mycursor=get_cursor()
+
+
+    if witch_one==True:
+        #Make the deletion process for the payment success
+        mycursor.execute(
+            "DELETE FROM webhook_success WHERE session_date < DATE_SUB(NOW(), INTERVAL 7 DAY)"
+        )
+    else:
+        #Make the deletion process for the payment failed
+        mycursor.execute(
+            "DELETE FROM webhook_fail WHERE session_date < DATE_SUB(NOW(), INTERVAL 7 DAY)"
+        )
+
+    #Commit the connection and close the cursor
+    conn.commit()
+    mycursor.close()
