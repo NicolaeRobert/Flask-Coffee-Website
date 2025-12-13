@@ -2,15 +2,36 @@
 
 This project is a web application developed using Flask, designed to practice Python and web development skills.
 
-## 🧩Description of technologies
+<video width="640" height="360" autoplay loop muted>
+  <source src="video.mp4" type="video/mp4">
+  Browser-ul tău nu suportă elementul video.
+</video>
 
-This project was created to deepen my programming knowledge and gain practical experience with web development. While learning **Python** independently, I wanted to explore building a full-stack web application, so I chose Flask as the backend framework.
+## 🧩 Technologies Used
 
-The frontend is developed using **HTML** and **CSS**, keeping it simple and clean.
+This project was created to deepen my programming knowledge and gain practical experience with full-stack web development. The technologies and approaches used in this project are summarized below:
 
-For data storage, I used **MySQL** to manage user information, including id, username, email, and hashed passwords, ensuring security best practices.
+### **Backend**
+- **Flask**: Chosen as the backend framework to build a complete web application.
+- **Flask Blueprints**: Provides modular and scalable architecture, making the application easier to maintain and extend.
 
-I also implemented **Flask Blueprints** to organize the project into modular components. This structure makes the application easier to maintain and extend, allowing separate parts of the project to be modified independently.
+### **Frontend**
+- **HTML & CSS**: Used to create a simple, clean, and user-friendly interface.
+
+### **Database**
+- **MySQL**: Stores essential user information such as `id`, `username`, `email`, and securely hashed passwords.
+
+### **Authentication**
+- **User dashboard**: Allows users to view orders, change passwords, and update usernames.
+- **Password reset via email**: Implemented using **JWT tokens** to securely encode user information and validate access.
+- **Google OAuth 2.0**: Allows users to log in quickly and securely with their Google account.
+
+### **Payments**
+- **Stripe**: Handles secure payment processing.
+- **Webhook handling**:  
+  - `payment_succeeded`: Clears the cart and sends a confirmation email.
+  - `payment_failed` : Sends an email to alert the user about the situation.
+
 
 ## 📝Description of the structure
 
@@ -28,7 +49,11 @@ project_root/
 │   ├── templates/
 │   ├── __init__.py
 │   ├── auth.py
+│   ├── buy_products.py
+│   ├── change_password_with_email.py
+│   ├── google_auth.py
 │   ├── routes.py
+│   ├── stripe.py
 │   └── utils.py
 │
 ├── venv/
@@ -39,29 +64,80 @@ project_root/
 └── run.py
 ```
 
-### 📁 Project Structure:
+### **Key Components**
 
+- **app/**: Contains the Flask application.  
+  - `__init__.py`: Creates the app and registers blueprints.  
+  - `routes.py`: Main blueprint for general pages.  
+  - `auth.py`: Handles registration, login, logout, and email confirmation.  
+  - `buy_products.py`: Manages the shopping cart.  
+  - `change_password_with_email.py`: Implements password reset via JWT email links.  
+  - `google_auth.py`: Handles Google OAuth 2.0 login.  
+  - `stripe.py`: Stripe payments and webhook events.  
+  - `utils.py`: Helper functions used throughout the project.  
+  - `templates/`: HTML templates.  
+  - `static/`: CSS, images, and other static assets.  
 
-- **.vscode/** is the folder containing the Visual Studio Code workspace settings. I didn’t modify anything here.
+- **venv/**: Virtual environment.  
+- **.env**: Stores sensitive configuration (API keys, passwords, secrets).  
+- **run.py**: Launches the Flask development server.  
 
-- **app/** is the folder that holds the entire application.  
-    - **__pycache__/** is a folder automatically created by Python. It stores compiled bytecode to make the program run faster. Whenever any file inside `app` is updated, Python will automatically regenerate this folder. You can delete it safely — Python will recreate it as needed.  
-    - **__init__.py** is the file that creates the Flask app instance and applies all configurations. This is also where the blueprints are registered.  
-    - **routes.py** is the file that defines the **main** blueprint, which represents the main pages of the web app.  
-    - **auth.py** is the file that defines the **auth_var** blueprint, which handles routes for registration, login, logout, and registration confirmation.  
-    - **utils.py** is the file that contains helper functions used throughout the project.  
-    - **templates/** is the folder that contains the HTML files. Flask automatically recognizes it by name.  
-    - **static/** is the folder that contains images and CSS files. Flask automatically recognizes it by name.  
+## 🗄️Database structure:
 
-- **venv/** is the virtual environment used to isolate the project dependencies.  
+```mermaid
+erDiagram
+    USERS {
+        INT id PK
+        VARCHAR username
+        VARCHAR email
+        VARCHAR password
+        VARCHAR created_with
+    }
 
-- **.env** is the file where sensitive information (like passwords and secret keys) is stored, and from which environment variables are loaded.  
+    PRODUCTS {
+        INT id PK
+        VARCHAR product_name
+        INT stock
+    }
 
-- **README.md** is this file, which provides a description and documentation for the project.  
+    ORDERS {
+        INT id PK
+        INT id_user FK
+        DATETIME date
+        BOOLEAN delivered
+        DECIMAL total
+    }
 
-- **requirements.txt** is a text file listing all the Python packages and dependencies required for this project.  
+    ORDER_ITEMS {
+        INT id PK
+        INT order_id FK
+        INT product_id FK
+        INT quantity
+    }
 
-- **run.py** is the file that imports the app factory from `app`, creates an instance of the Flask app, and runs the development server.
+    WEBHOOK_SUCCESS {
+        VARCHAR id PK
+        VARCHAR email
+        DATETIME session_date
+    }
+
+    WEBHOOK_FAIL {
+        VARCHAR id PK
+        VARCHAR email
+        DATETIME session_date
+    }
+
+    USERS ||--o{ ORDERS : places
+    ORDERS ||--o{ ORDER_ITEMS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+```
+
+### 🔗 Relationships
+- **USERS → ORDERS**: one user can place multiple orders
+- **ORDERS → ORDER_ITEMS**: one order contains multiple items
+- **PRODUCTS → ORDER_ITEMS**: one product can appear in multiple orders
+- **ORDERS ↔ PRODUCTS**: many-to-many relationship via `ORDER_ITEMS`
+- **WEBHOOK_SUCCESS / WEBHOOK_FAIL**: standalone webhook log tables(help us keep track of the ones already processed)
 
 ## ⚙️How to run it on your machine:
 
@@ -109,17 +185,19 @@ pip install -r requirements.txt
 Create a file named .env in the root folder and add your configuration, for example:
 
 ```
-#The mail that I am using
+APP_SECRET_KEY=your_secret_key
 EMAIL=your_email
+MAIL_PASSWORD=your_email_app_password
+DB_PASS=your_database_password
+OAUTHLIB_INSECURE_TRANSPORT=1
+CLIENT_ID=your_google_client_id
+CLIENT_SECRET=your_google_client_secret
+SECRET=your_jwt_secret
+PUBLISHABLE_KEY_STRIPE=your_stripe_publishable_key
+SECRET_KEY_STRIPE=your_stripe_secret_key
+ENDPOINT_SECRET_SUCCESS=your_stripe_success_webhook_secret
+ENDPOINT_SECRET_FAIL=your_stripe_fail_webhook_secret
 
-#The mail app password
-MAIL_PASSWORD=the mail app password generated
-
-#The secret key of the app
-APP_SECRET_KEY=a secret key
-
-#The database password
-DB_PASS=the password of yout MySQL database
 ```
 
 ### 5️⃣ Run the application
@@ -135,5 +213,6 @@ http://127.0.0.1:5000
 ```
 
 ## 🧠 Conclusion
-This project helped me strengthen my understanding of Flask, backend development, and database management using MySQL.  
-It was also a great opportunity to explore how different components of a web application work together.  
+This project helped me strengthen my full-stack development skills by working with Flask, MySQL, and a clean HTML/CSS frontend. I implemented key real-world features such as user authentication, password reset via JWT, Google OAuth 2.0 login, and Stripe payments with webhook handling.
+
+Building this application taught me how to design a secure, scalable, and modular web system, and it gave me the confidence to tackle more complex projects in the future. 
