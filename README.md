@@ -2,11 +2,6 @@
 
 This project is a web application developed using Flask, designed to practice Python and web development skills.
 
-<video width="640" height="360" autoplay loop muted>
-  <source src="video.mp4" type="video/mp4">
-  Browser-ul tău nu suportă elementul video.
-</video>
-
 ## 🧩 Technologies Used
 
 This project was created to deepen my programming knowledge and gain practical experience with full-stack web development. The technologies and approaches used in this project are summarized below:
@@ -211,6 +206,9 @@ Then open your browser and go to:
 ```
 http://127.0.0.1:5000
 ```
+
+## 🎥 Video of presentation
+👉 [Watch the video of presentation](./video.mp4)
 
 ## 🧠 Conclusion
 This project helped me strengthen my full-stack development skills by working with Flask, MySQL, and a clean HTML/CSS frontend. I implemented key real-world features such as user authentication, password reset via JWT, Google OAuth 2.0 login, and Stripe payments with webhook handling.
